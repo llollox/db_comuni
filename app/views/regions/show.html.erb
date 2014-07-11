@@ -41,15 +41,18 @@
     <%= link_to @region.website, "http://" + @region.website if @region.website %>
   </p>
 
-  <br/>
-  <%= link_to command_label('fa fa-edit', "Edit"), 
-    ["edit", @region], :class=> "btn btn-primary" %>
+  <% if current_user %>
+    <br/>
+    <%= link_to command_label('fa fa-edit', "Edit"), 
+      ["edit", @region], :class=> "btn btn-primary" %>
 
-  <%= link_to command_label('fa fa-trash-o', "Destroy"), 
-    @region, method: :delete, data: { confirm: 'Are you sure?' }, 
-    :class => "btn btn-danger" %>
+    <%= link_to command_label('fa fa-trash-o', "Destroy"), 
+      @region, method: :delete, data: { confirm: 'Are you sure?' }, 
+      :class => "btn btn-danger" %>
+  <% end %>
 
   </div>
 </div>
 
+<br/>
 <%= render "provinces/index" %>

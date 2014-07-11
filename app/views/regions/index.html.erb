@@ -2,7 +2,7 @@
 <center><h2>List of Regions</h2></center>
 <hr/>
 <%= link_to 'New Region', new_region_path, 
-    :class => "btn btn-success" %>
+    :class => "btn btn-success" if current_user %>
 <%= alphabetical_paginate @alphaParams %>
 <div id="pagination_table">
 <table class="table table-hover table-striped">
@@ -13,8 +13,10 @@
     <th>Abbreviation</th>
     <th># Provinces</th>
     <th>Capital</th>
-    <th></th>
-    <th></th>
+    <% if current_user %>
+        <th></th>
+        <th></th>
+    <% end %>
   </tr>
 
 <% @regions.each_with_index do |region,index| %>
@@ -24,11 +26,13 @@
     <td><%= link_to region.name, region %></td>
     <td><%= region.abbreviation %></td>
     <td><%= region.provinces.size.to_s %></td>
-    <td><%#= link_to region.capital.name, region.capital %></td>
-    <td><%= link_to 'Edit', edit_region_path(region), 
-        :class => "btn btn-primary" %></td>
-    <td><%= link_to 'Destroy', region, method: :delete, data: { confirm: 'Are you sure?' },
-        :class => "btn btn-danger" %></td>
+    <td><%= link_to region.capital.name, region.capital %></td>
+    <% if current_user %>
+        <td><%= link_to 'Edit', edit_region_path(region), 
+            :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Destroy', region, method: :delete, 
+            data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

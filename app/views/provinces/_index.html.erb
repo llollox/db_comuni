@@ -1,5 +1,6 @@
-<legend>Provinces</legend>
-<%= link_to 'New Province', new_region_province_path(@region), :class => "btn btn-success" %>
+<legend>Provinces (<%= @provinces.size.to_s %>)</legend>
+<%= link_to 'New Province', new_region_province_path(@region), 
+  :class => "btn btn-success" if current_user %>
 <% if !@provinces.empty? %>
 
   <%= alphabetical_paginate @alphaParams %>
@@ -12,8 +13,10 @@
       <th>Abbreviation</th>
       <th># Municipalities</th>
       <th>Capital</th>
-      <th></th>
-      <th></th>
+      <% if current_user %>
+        <th></th>
+        <th></th>
+      <% end %>
     </tr>
 
     <% @provinces.each_with_index do |province,index| %>
@@ -25,10 +28,12 @@
       <td><%= province.municipalities.size.to_s %></td>
       <td><%= link_to province.region.capital.name, 
           province.region.capital if province.region.capital%></td>
-      <td><%= link_to 'Edit', edit_province_path(province), 
-      :class => "btn btn-primary" %></td>
-      <td><%= link_to 'Destroy', province, method: :delete, data: { confirm: 'Are you sure?' },
-      :class => "btn btn-danger" %></td>
+      <% if current_user %>
+        <td><%= link_to 'Edit', edit_province_path(province), 
+          :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Destroy', province, method: :delete, 
+          data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+      <% end %>
     </tr>
     <% end %>
   </table>

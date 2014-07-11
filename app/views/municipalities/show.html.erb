@@ -66,14 +66,17 @@
       <%= link_to @municipality.website, "http://" + @municipality.website if @municipality.website %>
     </p>
 
-    <br/>
+    <% if current_user %>
 
-    <%= link_to command_label('fa fa-edit', "Edit"), 
-    edit_municipality_path(@municipality), :class=> "btn btn-primary" %>
+      <br/>
 
-    <%= link_to command_label('fa fa-trash-o', "Destroy"), 
-    @municipality, method: :delete, data: { confirm: 'Are you sure?' }, 
-    :class => "btn btn-danger" %>
+      <%= link_to command_label('fa fa-edit', "Edit"), 
+      edit_municipality_path(@municipality), :class=> "btn btn-primary" %>
+
+      <%= link_to command_label('fa fa-trash-o', "Destroy"), 
+      @municipality, method: :delete, data: { confirm: 'Are you sure?' }, 
+      :class => "btn btn-danger" %>
+    <% end %>
 
   </div>
 </div>

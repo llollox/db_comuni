@@ -1,4 +1,5 @@
 ComuniItaliani::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -19,6 +20,14 @@ ComuniItaliani::Application.routes.draw do
   match 'regions/search/:word' => 'regions#search', :as => :regions_search  
   match 'provinces/search/:word' => 'provinces#search', :as => :provinces_search  
   match 'municipalities/search/:word' => 'municipalities#search', :as => :municipalities_search
+
+  resources :users
+
+  resources :user_sessions
+  
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+  
   # match 'search/:word' => 'search#search', :as => :search
   # match 'search/:word/:type' => 'search#search', :as => :search
 

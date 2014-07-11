@@ -41,16 +41,21 @@
   <%= link_to @province.website, "http://" + @province.website if @province.website %>
 </p>
 
+<% if current_user %>
+
+  <br/>
+
+  <%= link_to command_label('fa fa-edit', "Edit"), 
+      edit_province_path(@province), :class=> "btn btn-primary" %>
+
+  <%= link_to command_label('fa fa-trash-o', "Destroy"), 
+      @province, method: :delete, data: { confirm: 'Are you sure?' }, 
+      :class => "btn btn-danger" %>
+<% end %>
+
+</div>
+</div>
+
 <br/>
-
-<%= link_to command_label('fa fa-edit', "Edit"), 
-    edit_province_path(@province), :class=> "btn btn-primary" %>
-
-<%= link_to command_label('fa fa-trash-o', "Destroy"), 
-    @province, method: :delete, data: { confirm: 'Are you sure?' }, 
-    :class => "btn btn-danger" %>
-
-</div>
-</div>
 
 <%= render "municipalities/index" %>

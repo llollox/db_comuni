@@ -9,8 +9,16 @@
       <a class="brand" href="#">Comuni</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li id="list"><%= link_to "List", regions_path %></li>
-          <li id="map-item"><%= link_to "Map", map_path %></li>
+          <li id="list-item"><%= link_to "List", regions_path %></li>
+          <li id="map-item"><%= link_to "Map", map_path %></li>          
+        </ul>
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <li id="logout-item"><%= link_to "Logout", :logout%></li>  
+          <% else %>
+            <!-- <li id="register-item"><%#= link_to "Register", new_user_path%></li> -->
+            <li id="login-item"><%= link_to "Login", :login %></li>
+          <% end %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -20,9 +28,13 @@
 <script type="text/javascript">
 $(document).ready(function(){
   <% if controller_name == "regions" %>
-    $("#list").addClass("active");
+    $("#list-item").addClass("active");
   <% elsif action_name == "map" %>
     $("#map-item").addClass("active");
+  <%# elsif controller_name == "users" %>
+    //$("#register-item").addClass("active");
+  <% elsif controller_name == "user-sessions" %>
+    $("#login-item").addClass("active");
   <% end %>
 });
 </script>

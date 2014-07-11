@@ -1,6 +1,6 @@
-<legend>Municipalities</legend>
+<legend>Municipalities (<%= @municipalities.size.to_s %>)</legend>
 <%= link_to 'New Municipality', new_province_municipality_path(@province), 
-    :class => "btn btn-success" %>
+    :class => "btn btn-success" if current_user %>
 
 <%= alphabetical_paginate @alphaParams %>
 <div id="pagination_table">
@@ -11,8 +11,10 @@
     <th>Name</th>
     <th>Cap</th>
     <th>Population</th>
-    <th></th>
-    <th></th>
+    <% if current_user %>
+        <th></th>
+        <th></th>
+    <% end %>
   </tr>
 
 <% @municipalities.each_with_index do |municipality,index| %>
@@ -22,10 +24,12 @@
     <td><%= link_to municipality.name, municipality %></td>
     <td><%= render "municipalities/cap", :municipality => municipality %></td>
     <td><%= municipality.population %></td>
-    <td><%= link_to 'Edit', edit_municipality_path(municipality), 
-        :class => "btn btn-primary" %></td>
-    <td><%= link_to 'Destroy', municipality, method: :delete, data: { confirm: 'Are you sure?' },
-        :class => "btn btn-danger" %></td>
+    <% if current_user %>
+        <td><%= link_to 'Edit', edit_municipality_path(municipality), 
+            :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Destroy', municipality, method: :delete, data: { confirm: 'Are you sure?' },
+            :class => "btn btn-danger" %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

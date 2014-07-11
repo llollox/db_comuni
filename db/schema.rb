@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140708122622) do
+ActiveRecord::Schema.define(:version => 20140711093107) do
 
   create_table "caps", :force => true do |t|
     t.string   "number"
@@ -22,9 +22,7 @@ ActiveRecord::Schema.define(:version => 20140708122622) do
 
   create_table "municipalities", :force => true do |t|
     t.integer  "province_id"
-    t.integer  "region_id"
     t.string   "name"
-    t.integer  "capital_id"
     t.string   "president"
     t.integer  "population"
     t.float    "density"
@@ -56,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20140708122622) do
     t.integer  "region_id"
     t.string   "name"
     t.string   "president"
-    t.integer  "capital_id"
     t.integer  "population"
     t.float    "density"
     t.float    "surface"
@@ -79,6 +76,16 @@ ActiveRecord::Schema.define(:version => 20140708122622) do
     t.string   "website"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
 end

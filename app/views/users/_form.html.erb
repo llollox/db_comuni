@@ -1,0 +1,13 @@
+<%= simple_form_for(@user, html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :username, :label => "Username", :placeholder => "Username" %>
+    <%= f.input :email, :label => "Email", :placeholder => "Email", as: :email %>
+    <%= f.input :password, :label => "Password", :placeholder => "Password", as: :password %>
+    <%= f.input :password_confirmation, :label => "Password Confirmation", 
+        :placeholder => "Password Confirmation", as: :password %>
+  </div>
+
+  <%= render "forms/create_edit_buttons", :f => f %>
+<% end %>
