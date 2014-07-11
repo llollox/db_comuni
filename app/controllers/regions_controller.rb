@@ -2,6 +2,8 @@ class RegionsController < ApplicationController
   require "#{Rails.root}/lib/tasks/task_utilities"
   include TaskUtilities
   
+  before_filter :check_login, :only => [:delete, :create, :new, :update, :edit]
+  
   # GET /regions
   # GET /regions.json
   def index
