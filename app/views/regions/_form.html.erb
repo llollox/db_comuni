@@ -1,0 +1,17 @@
+<%= simple_form_for(@object, html: { class: 'form-horizontal', :multipart => true }) do |f| %>
+  
+  <%= f.input :name, :label => "Name", :placeholder => "Name" %>
+
+  <%= f.input :president, :label => "President", :placeholder => "President" %>
+
+  <%= render "forms/symbol", :f => f %>
+
+  <%= render "forms/territorial_fields", :f => f %>
+
+  <%= render "forms/contact_fields", :f => f %>
+
+  <br/>
+  
+  <%= render "forms/create_edit_buttons", :f => f %>
+
+<% end %>

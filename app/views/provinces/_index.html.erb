@@ -1,0 +1,41 @@
+<legend>Provinces</legend>
+<%= link_to 'New Province', new_region_province_path(@region), :class => "btn btn-success" %>
+<% if !@provinces.empty? %>
+
+  <%= alphabetical_paginate @alphaParams %>
+  <div id="pagination_table">
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>#</th>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>Abbreviation</th>
+      <th># Municipalities</th>
+      <th>Capital</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% @provinces.each_with_index do |province,index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= image_tag(province.symbol.photo.url(:thumb)) if province.symbol %></td>
+      <td><%= link_to province.name, province %></td>
+      <td><%= province.abbreviation %></td>
+      <td><%= province.municipalities.size.to_s %></td>
+      <td><%= link_to province.region.capital.name, 
+          province.region.capital if province.region.capital%></td>
+      <td><%= link_to 'Edit', edit_province_path(province), 
+      :class => "btn btn-primary" %></td>
+      <td><%= link_to 'Destroy', province, method: :delete, data: { confirm: 'Are you sure?' },
+      :class => "btn btn-danger" %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+
+<% else %>
+<p class="muted">
+  <i>No provinces for this region!</i>
+</p>
+<% end %>

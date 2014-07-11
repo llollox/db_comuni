@@ -1,0 +1,20 @@
+<ul class="breadcrumb">
+	<li><%= link_to "Regions", regions_path %> <span class="divider">/</span></li>
+
+  <% if controller_name == "regions" %>
+  	<!-- <li><%#= link_to "Marchi", brands_path %> <span class="divider">/</span></li> -->
+  	<li class="active"><%= @region.name %></li>
+  
+  <% elsif controller_name == "provinces" %>
+  	<li><%= link_to @province.region.name, @province.region %> <span class="divider">/</span></li>
+  	<li class="active"><%= @province.name %></li>
+  
+  <% elsif controller_name == "municipalities" %>
+  	<!-- <li><%#= link_to "Marchi", regions_path %> <span class="divider">/</span></li> -->
+  	<li><%= link_to @municipality.province.region.name, @municipality.province.region %> 
+  		<span class="divider">/</span></li>
+  	<li><%= link_to @municipality.province.name, @municipality.province %> 
+      <span class="divider">/</span></li>
+  	<li class="active"><%= @municipality.name %></li>
+  <% end %>
+</ul>

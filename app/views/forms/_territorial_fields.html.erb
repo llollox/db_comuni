@@ -1,0 +1,16 @@
+<legend>Territorial Information</legend>
+
+<%= f.input :population, :label => "Population", :placeholder => "Population", 
+  :as => :integer, :wrapper => :append do %>
+  <%= f.input_field :population %><span class="add-on">citizens</span>
+<% end %>
+
+<%= f.input :density, :label => "Density", :placeholder => "Density", 
+  :as => :float, :wrapper => :append do %>
+  <%= f.input_field :density %><span class="add-on">ct./km²</span>
+<% end %>
+
+<%= f.input :surface, :label => "Surface", :placeholder => "Surface", 
+  :as => :float , :wrapper => :append do %>
+  <%= f.input_field :surface %><span class="add-on">km²</span>
+<% end %>

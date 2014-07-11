@@ -1,0 +1,55 @@
+<br/>
+<%= render "layouts/breadcrumb" %>
+<br/>
+
+<div class="row-fluid">
+  <div class="span6">
+  <center>
+    <td><%= image_tag(@region.symbol.photo.url(:medium)) %></td>
+    <h2><%= @region.name %></h2>
+  </center>
+  </div>
+  <div class="span6">
+
+  <p>
+    <b>President:</b>
+    <%= @region.president if @region.president %>
+  </p>
+
+  <p>
+    <b>Population:</b>
+    <%= separate_comma(@region.population.to_s) if @region.population %> citizens
+  </p>
+
+  <p>
+    <b>Density:</b>
+    <%= separate_comma_decimals(@region.density.to_s) if @region.density %> ct./km²
+  </p>
+
+  <p>
+    <b>Surface:</b>
+    <%= separate_comma_decimals(@region.surface.to_s) if @region.surface %> km²
+  </p>
+
+  <p>
+    <b>Email:</b>
+    <%= mail_to @region.email if @region.email %>
+  </p>
+
+  <p>
+    <b>WebSite:</b>
+    <%= link_to @region.website, "http://" + @region.website if @region.website %>
+  </p>
+
+  <br/>
+  <%= link_to command_label('fa fa-edit', "Edit"), 
+    ["edit", @region], :class=> "btn btn-primary" %>
+
+  <%= link_to command_label('fa fa-trash-o', "Destroy"), 
+    @region, method: :delete, data: { confirm: 'Are you sure?' }, 
+    :class => "btn btn-danger" %>
+
+  </div>
+</div>
+
+<%= render "provinces/index" %>

@@ -1,0 +1,56 @@
+<br/>
+<%= render "layouts/breadcrumb" %>
+<br/>
+
+<div class="row-fluid">
+<div class="span6">
+<center>
+  <td><%= image_tag(@province.symbol.photo.url(:medium)) %></td>
+  <h2><%= @province.name %></h2>
+</center>
+</div>
+<div class="span6">
+  
+<p>
+  <b>Region:</b>
+  <%= link_to @province.region.name, @province.region %>
+</p>
+
+<p>
+  <b>Population:</b>
+  <%= separate_comma(@province.population.to_s) if @province.population %> citizens
+</p>
+
+<p>
+  <b>Density:</b>
+  <%= separate_comma_decimals(@province.density.to_s) if @province.density %> ct./km²
+</p>
+
+<p>
+  <b>Surface:</b>
+  <%= separate_comma_decimals(@province.surface.to_s) if @province.surface %> km²
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= mail_to @province.email if @province.email %>
+</p>
+
+<p>
+  <b>WebSite:</b>
+  <%= link_to @province.website, "http://" + @province.website if @province.website %>
+</p>
+
+<br/>
+
+<%= link_to command_label('fa fa-edit', "Edit"), 
+    edit_province_path(@province), :class=> "btn btn-primary" %>
+
+<%= link_to command_label('fa fa-trash-o', "Destroy"), 
+    @province, method: :delete, data: { confirm: 'Are you sure?' }, 
+    :class => "btn btn-danger" %>
+
+</div>
+</div>
+
+<%= render "municipalities/index" %>

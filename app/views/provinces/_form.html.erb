@@ -1,0 +1,19 @@
+<%= simple_form_for(@object, html: { class: 'form-horizontal' }) do |f| %>
+  
+  <%= f.input :name, :label => "Name", :placeholder => "Name" %>
+
+  <%= f.input :abbreviation, :label => "Abbreviation", :placeholder => "Abbreviation" %>
+
+  <%= f.association :region, :label => "Region",
+      include_blank: false, :selected => @region.id %>
+
+  <%= render "forms/symbol", :f => f %>
+
+  <%= render "forms/territorial_fields", :f => f %>
+
+  <%= render "forms/contact_fields", :f => f %>
+
+  <br/>
+
+  <%= render "forms/create_edit_buttons", :f => f %>
+<% end %>

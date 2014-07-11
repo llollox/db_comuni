@@ -1,0 +1,12 @@
+<%= f.label :symbol %>
+<% if f.object.symbol %>
+	<%= image_tag(f.object.symbol.photo.url(:thumb), :class => "symbol-img") %>
+<% end %>
+<%= f.input :symbol, :label => false, as: :file %>
+
+<style type="text/css">
+  .symbol-img {
+  	margin-left: 20px;
+  	margin-bottom: 20px;
+  }
+</style>

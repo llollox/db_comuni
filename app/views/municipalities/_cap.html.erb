@@ -1,0 +1,5 @@
+<% if municipality.caps.size == 1 %>
+<%= municipality.caps.first.number %>
+<% else %>
+<%= municipality.caps.first.number + " ... " + municipality.caps[-1].number %>
+<% end %>

@@ -1,0 +1,80 @@
+<br/>
+<%= render "layouts/breadcrumb" %>
+<br/>
+
+<div class="row-fluid">
+  <div class="span6">
+    <center>
+      <td><%= image_tag(@municipality.symbol.photo.url(:medium)) %></td>
+      <h2><%= @municipality.name %></h2>
+    </center>
+  </div>
+  <div class="span6">
+
+    <p>
+      <b>Province:</b>
+      <%= link_to @municipality.province.name, @municipality.province %>
+    </p>
+    
+    <p>
+      <b>Region:</b>
+      <%= link_to @municipality.region.name, @municipality.region %>
+    </p>
+
+    <p>
+      <b>Cap:</b>
+      <%= render "cap", :municipality => @municipality %>
+    </p>
+
+    <p>
+      <b>Istat Code:</b>
+      <%= @municipality.istat_code if @municipality.istat_code %>
+    </p>
+
+    <p>
+      <b>Cadastral Code:</b>
+      <%= @municipality.cadastral_code if @municipality.cadastral_code %>
+    </p>
+
+    <p>
+      <b>Telephone Prefix:</b>
+      <%= @municipality.telephone_prefix if @municipality.telephone_prefix %>
+    </p>
+
+    <p>
+      <b>Population:</b>
+      <%= separate_comma(@municipality.population.to_s) if @municipality.population %> citizens
+    </p>
+
+    <p>
+      <b>Density:</b>
+      <%= separate_comma_decimals(@municipality.density.to_s) if @municipality.density %> ct./km²
+    </p>
+
+    <p>
+      <b>Surface:</b>
+      <%= separate_comma_decimals(@municipality.surface.to_s) if @municipality.surface %> km²
+    </p>
+
+    <p>
+      <b>Email:</b>
+      <%= mail_to @municipality.email if @municipality.email %>
+    </p>
+
+    <p>
+      <b>WebSite:</b>
+      <%= link_to @municipality.website, "http://" + @municipality.website if @municipality.website %>
+    </p>
+
+    <br/>
+
+    <%= link_to command_label('fa fa-edit', "Edit"), 
+    edit_municipality_path(@municipality), :class=> "btn btn-primary" %>
+
+    <%= link_to command_label('fa fa-trash-o', "Destroy"), 
+    @municipality, method: :delete, data: { confirm: 'Are you sure?' }, 
+    :class => "btn btn-danger" %>
+
+  </div>
+</div>
+
