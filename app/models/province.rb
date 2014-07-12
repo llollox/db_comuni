@@ -9,4 +9,8 @@ class Province < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def name_with_abbreviation
+  	self.name + " (" + self.abbreviation + ")"
+  end
+
 end	

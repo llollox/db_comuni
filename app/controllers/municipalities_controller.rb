@@ -27,13 +27,13 @@ class MunicipalitiesController < ApplicationController
   end
 
   def map
-    @municipalities = Municipality.where("latitude IS NOT NULL", "longitude IS NOT NULL")
+    @municipalities = Municipality.where("latitude IS NOT NULL")
 
     @markers = Gmaps4rails.build_markers(@municipalities) do |municipality, marker|
       marker.lat municipality.latitude
       marker.lng municipality.longitude
-      marker.title municipality.name
-      marker.infowindow municipality.name
+      marker.title municipality.id.to_s
+      marker.infowindow "Loading ..."
     end
 
     respond_to do |format|
@@ -57,6 +57,15 @@ class MunicipalitiesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render json: @municipality }
+    end
+  end
+
+  def infobox
+    @municipality = Municipality.find(params[:id])
+    
+    respond_to do |format|
+      format.html { render :layout => false} # infobox.html.erb
       format.json { render json: @municipality }
     end
   end

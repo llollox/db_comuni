@@ -21,6 +21,8 @@ ComuniItaliani::Application.routes.draw do
   match 'provinces/search/:word' => 'provinces#search', :as => :provinces_search  
   match 'municipalities/search/:word' => 'municipalities#search', :as => :municipalities_search
 
+  match 'municipalities/:id/infobox' => 'municipalities#infobox', :as => :municipalities_infobox
+
   resources :users
 
   resources :user_sessions

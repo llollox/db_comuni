@@ -1,0 +1,31 @@
+<div class="row-fluid">
+	<div class="span4">
+		<center>
+			<%= image_tag(@municipality.symbol.photo.url(:thumb), :class => "infobox-symbol") if !@municipality.symbol.nil? %>
+		</center>
+	</div>
+	<div class="span1"></div>
+	<div class="span7">
+		<h4><%= link_to @municipality.name, @municipality %></h4>
+
+    <b>Province:</b>
+    <%= link_to @municipality.province.name_with_abbreviation, @municipality.province %>
+    <br/>
+
+    <b>Region:</b>
+    <%= link_to @municipality.region.name, @municipality.region %>
+    <br/>
+
+    <b>Cap:</b>
+    <%= render "cap", :municipality => @municipality %>
+    
+	</div>
+</div>
+
+<style type="text/css">
+.infobox-symbol{
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+}
+</style>

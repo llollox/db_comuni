@@ -1,11 +1,11 @@
-class InfoBoxBuilder extends Gmaps.Google.Builders.Marker
+class @InfoBoxBuilder extends Gmaps.Google.Builders.Marker
  	# inherit from base builder
   # override method
   create_infowindow: ->
     return null unless _.isString @args.infowindow
 
     boxText = document.createElement("div")
-    boxText.setAttribute("class", 'yellow') #to customize
+    boxText.setAttribute("class", 'infobox1') #to customize
     boxText.innerHTML = @args.infowindow
     @infowindow = new InfoBox(@infobox(boxText))
 
