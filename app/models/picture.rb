@@ -22,7 +22,7 @@ class Picture < ActiveRecord::Base
    end
   },
 
-  :convert_options => { :all => '-density 300 -quality 100' }, 
+  :convert_options => { :all => '-density 300 -quality 100' }
 
   # :default_url => ActionController::Base.helpers.asset_path('missing_:style.png')
      
