@@ -9,7 +9,7 @@ role :app, %w{road@www2.westroadbike.it}
 role :web, %w{road@www2.westroadbike.it}
 role :db,  %w{road@www2.westroadbike.it}
 
-set :linked_files, %w{db/production.sqlite3}
+# set :linked_files, %w{db/production.sqlite3}
 
 
 # Extended Server Syntax

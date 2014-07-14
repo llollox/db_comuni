@@ -4,14 +4,23 @@ lock '3.2.1'
 set :application, 'db_comuni'
 set :repo_url, 'https://github.com/llollox/db_comuni'
 
+set :rails_env, 'production'
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, '/webapps/db_comuni'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
+
+set :ssh_options, {
+  forward_agent: true,
+  port: 1122
+}
+
+set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
 
 # Default value for :format is :pretty
 # set :format, :pretty

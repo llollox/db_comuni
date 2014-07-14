@@ -31,7 +31,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'meta_request'
   #html scraping
-  gem 'nokogiri'
   gem 'taps'
 
   gem 'capistrano',  '~> 3.1'
@@ -39,6 +38,8 @@ group :development, :test do
   #gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-bundler', '~> 1.1.2'
 end
+
+gem 'nokogiri'
 
 gem 'simple_form'
 gem "nested_form"
