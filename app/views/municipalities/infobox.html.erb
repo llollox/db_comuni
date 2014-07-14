@@ -6,7 +6,7 @@
 	</div>
 	<div class="span1"></div>
 	<div class="span7">
-		<h4><%= link_to @municipality.name, @municipality %></h4>
+		<h4 class="municipality-name"><%= link_to @municipality.name, @municipality %></h4>
 
     <b>Province:</b>
     <%= link_to @municipality.province.name_with_abbreviation, @municipality.province %>
@@ -27,5 +27,8 @@
 	max-width: 100%;
 	max-height: 100%;
 	margin: auto;
+}
+.municipality-name{
+	margin-top: 0px !important;
 }
 </style>

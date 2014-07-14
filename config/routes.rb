@@ -6,7 +6,7 @@ ComuniItaliani::Application.routes.draw do
 
   resources :regions, shallow: true do
     resources :provinces, shallow: true do
-      resources :municipalities, shallow: true
+      resources :municipalities, shallow: true 
     end
   end
 
@@ -15,11 +15,15 @@ ComuniItaliani::Application.routes.draw do
   match 'provinces' => 'provinces#all', :as => :provinces
   match 'municipalities' => 'municipalities#all', :as => :municipalities
 
-  match 'map' => 'municipalities#map', :as => :map
+  match 'map' => 'municipalities#map', :as => :map 
+  
+  post 'regions/search' => 'regions#search', :as => :regions_search
+  post 'provinces/search' => 'provinces#search', :as => :provinces_search
+  post 'municipalities/search' => 'municipalities#search', :as => :municipalities_search
 
-  match 'regions/search/:word' => 'regions#search', :as => :regions_search  
-  match 'provinces/search/:word' => 'provinces#search', :as => :provinces_search  
-  match 'municipalities/search/:word' => 'municipalities#search', :as => :municipalities_search
+
+  # match 'search' => 'search#search', :as => :search
+  # match 'search' => 'search#search', :as => :search
 
   match 'municipalities/:id/infobox' => 'municipalities#infobox', :as => :municipalities_infobox
 

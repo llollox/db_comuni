@@ -2,6 +2,8 @@ class RegionsController < ApplicationController
   require "#{Rails.root}/lib/tasks/task_utilities"
   include TaskUtilities
   
+  # skip_before_filter  :verify_authenticity_token
+
   before_filter :check_login, :only => [:delete, :create, :new, :update, :edit]
   
   # GET /regions
@@ -18,10 +20,11 @@ class RegionsController < ApplicationController
   end
 
   def search
-    @region = findItemByName("Region", params[:word])
+    name = encode(params[:name]) if params[:name]
+    
+    @region = findItemByName("Region", name) if !name.nil?
 
     respond_to do |format|
-      format.html # show.html.erb
       format.json { render json: @region }
     end
   end
@@ -34,8 +37,6 @@ class RegionsController < ApplicationController
     @provinces, @alphaParams = 
       @region.provinces.sort_by{ |p| p.name.downcase }
         .alpha_paginate(params[:letter], {:js => true}){|province| province.name}
-
-    # @provinces = @region.provinces
 
     respond_to do |format|
       format.html # show.html.erb

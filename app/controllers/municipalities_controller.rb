@@ -4,6 +4,24 @@ class MunicipalitiesController < ApplicationController
 
   before_filter :check_login, :only => [:delete, :create, :new, :update, :edit]
 
+
+  def search
+
+    province_id = encode(params[:province_id]) if params[:province_id]
+    name = encode(params[:name]) if params[:name]
+
+    if !province_id.nil?
+      @municipality = findMunicipalityByName(province_id, name)
+    else
+      @municipality = findItemByName("Municipality", name)
+    end
+
+    respond_to do |format|
+      format.json { render json: @municipality }
+    end
+
+  end
+
   # GET /municipalities
   # GET /municipalities.json
   def all
@@ -38,15 +56,6 @@ class MunicipalitiesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-    end
-  end
-
-  def search
-    @municipality = findItemByName("Municipality", params[:word])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @municipality }
     end
   end
 

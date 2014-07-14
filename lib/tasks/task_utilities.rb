@@ -109,17 +109,21 @@ module TaskUtilities
   end
 
   def findItemByName class_name, item_name
+    items = []
     class_name.constantize.all.each do |item|
       if encode(item.name) == encode(item_name)
-        return item
+        items << item
       end
     end
-    return nil
+
+    return nil if items.empty?
+    return items.first if items.size == 1
+    return items
   end
 
   def findMunicipalityByName province_id, name
     Municipality.all.each do |item|
-      if encode(item.name) == encode(name) && province_id == item.province.id
+      if encode(item.name) == encode(name) && province_id.to_i == item.province.id
         return item
       end
     end

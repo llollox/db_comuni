@@ -29,12 +29,13 @@ class ProvincesController < ApplicationController
     end
   end
 
-  def search
-    @region = findItemByName("Province", params[:word])
+   def search
+    name = encode(params[:name]) if params[:name]
+    
+    @province = findItemByName("Province", name) if !name.nil?
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @region }
+      format.json { render json: @province }
     end
   end
 
