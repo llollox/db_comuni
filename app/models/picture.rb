@@ -24,7 +24,7 @@ class Picture < ActiveRecord::Base
 
   :convert_options => { :all => '-density 300 -quality 100' }, 
 
-  :default_url => ActionController::Base.helpers.asset_path('missing_:style.png')
+  # :default_url => ActionController::Base.helpers.asset_path('missing_:style.png')
      
   validates_attachment_size :photo, :less_than => 5.megabytes
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png','application/pdf','image/gif']
