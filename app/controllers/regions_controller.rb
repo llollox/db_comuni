@@ -22,7 +22,21 @@ class RegionsController < ApplicationController
   def search
     name = encode(params[:name]) if params[:name]
     
-    @region = findItemByName("Region", name) if !name.nil?
+    if !name.nil?
+
+      if encode(name) == "trentino" || encode(name) == "altoadige"
+        @region = findItemByName("Region", "trentinoaltoadige")
+      elsif encode(name) == "romagna" || encode(name) == "emilia"
+        @region = findItemByName("Region", "emiliaromagna")
+      elsif encode(name) == "friuli"
+        @region = findItemByName("Region", "friuliveneziagiulia")
+      elsif encode(name) == "aosta" || encode(name) == "valdaosta"
+        @region = findItemByName("Region", "valledaosta")
+      else
+        @region = findItemByName("Region", name)
+      end
+
+    end
 
     respond_to do |format|
       format.json { render json: @region }

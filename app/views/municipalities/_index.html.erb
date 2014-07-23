@@ -20,7 +20,7 @@
 <% @municipalities.each_with_index do |municipality,index| %>
   <tr>
     <td><%= index + 1 %></td>
-    <td><%= image_tag(municipality.symbol.photo.url(:thumb)) %></td>
+    <td><%= image_tag(municipality.symbol.photo.url(:thumb)) if municipality.symbol %></td>
     <td><%= link_to municipality.name, municipality %></td>
     <td><%= render "municipalities/cap", :municipality => municipality %></td>
     <td><%= municipality.population %></td>
