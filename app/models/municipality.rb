@@ -7,6 +7,7 @@ class Municipality < ActiveRecord::Base
   belongs_to :province
   belongs_to :region
   has_many :caps
+  has_many :fractions
 
   has_one :symbol, :class_name => "Picture", as: :picturable, dependent: :destroy
 

@@ -64,6 +64,10 @@ class MunicipalitiesController < ApplicationController
   def show
     @municipality = Municipality.find(params[:id])
 
+    @fractions, @alphaParams = 
+       @municipality.fractions.sort_by{ |m| m.name.downcase }
+         .alpha_paginate(params[:letter], {:js => true}){|fraction| fraction.name}
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @municipality }
