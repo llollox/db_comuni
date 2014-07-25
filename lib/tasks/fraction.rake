@@ -28,7 +28,7 @@ namespace :fractions do
     ROOT_URL = "http://italia.indettaglio.it/ita/comuni/comuni_"
     empty_letters = ['k','w','y','x']
     
-    ('b'..'z').to_a.each do |letter|
+    ('r'..'z').to_a.each do |letter|
       if !empty_letters.include?(letter)
         municipalities_page = openUrl(ROOT_URL + letter + ".html")
         municipalities_select = municipalities_page.css("select[name='place']").first
