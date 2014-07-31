@@ -1,6 +1,6 @@
 <%= simple_form_for(@object, html: { class: 'form-horizontal' }) do |f| %>
   
   <%= f.input :name, :label => "Name", :placeholder => "Name" %>
-
+  <%= f.input :municipality_id, :as => :hidden, :input_html => { :value => @municipality.id.to_s } %>
   <%= render "forms/create_edit_buttons", :f => f %>
 <% end %>

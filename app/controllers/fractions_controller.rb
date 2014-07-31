@@ -1,4 +1,4 @@
-class FractionsController < ApplicationController
+  class FractionsController < ApplicationController
   require "#{Rails.root}/lib/tasks/task_utilities"
   include TaskUtilities
 
@@ -28,29 +28,25 @@ class FractionsController < ApplicationController
     end
   end
 
-  # def index
-  #   @fractions = Fraction.where(:municipality_id => params[:municipality_id])
+  def index
+    @fractions = Fraction.where(:municipality_id => params[:municipality_id])
 
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.json { render json: @fractions }
-  #   end
-  # end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @fractions }
+    end
+  end
 
   # GET /municipalities/1
   # GET /municipalities/1.json
-  # def show
-  #   @municipality = Municipality.find(params[:id])
+  def show
+    @fraction = Fraction.find(params[:id])
 
-  #   @fractions, @alphaParams = 
-  #      @municipality.fractions.sort_by{ |m| m.name.downcase }
-  #        .alpha_paginate(params[:letter], {:js => true}){|fraction| fraction.name}
-
-  #   respond_to do |format|
-  #     format.html # show.html.erb
-  #     format.json { render json: @municipality }
-  #   end
-  # end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @fraction }
+    end
+  end
 
   # GET /municipalities/new
   # GET /municipalities/new.json
@@ -82,9 +78,11 @@ class FractionsController < ApplicationController
   def create
     @fraction = Fraction.new(params[:fraction])
 
+    @municipality = @fraction.municipality
+
     respond_to do |format|
       if @fraction.save
-        format.html { redirect_to @fraction, notice: 'Fraction was successfully created.' }
+        format.html { redirect_to @municipality, notice: 'Fraction was successfully created.' }
         format.json { render json: @fraction, status: :created, location: @fraction }
       else
         format.html { render action: "new" }
@@ -100,7 +98,7 @@ class FractionsController < ApplicationController
 
     respond_to do |format|
       if @fraction.update_attributes(params[:fraction])
-        format.html { redirect_to @fraction, notice: 'Fraction was successfully updated.' }
+        format.html { redirect_to @fraction.municipality, notice: 'Fraction was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -116,7 +114,7 @@ class FractionsController < ApplicationController
     @fraction.destroy
 
     respond_to do |format|
-      format.html { redirect_to trips_url }
+      format.html { redirect_to regions_url }
       format.json { head :no_content }
     end
   end

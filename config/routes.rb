@@ -8,6 +8,7 @@ ComuniItaliani::Application.routes.draw do
     resources :provinces, shallow: true do
       resources :municipalities, shallow: true do
         resources :fractions, shallow: true
+        resources :caps, shallow: true
       end
     end
   end
@@ -23,6 +24,7 @@ ComuniItaliani::Application.routes.draw do
   post 'regions/search' => 'regions#search', :as => :regions_search
   post 'provinces/search' => 'provinces#search', :as => :provinces_search
   post 'municipalities/search' => 'municipalities#search', :as => :municipalities_search
+  post 'caps/search' => 'caps#search', :as => :caps_search
   post 'fractions/search' => 'fractions#search', :as => :fractions_search
 
 
