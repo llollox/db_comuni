@@ -9,11 +9,13 @@ ComuniItaliani::Application.routes.draw do
       resources :municipalities, shallow: true do
         resources :fractions, shallow: true
         resources :caps, shallow: true
+        resources :pictures, shallow: true
       end
+      resources :pictures, shallow: true
     end
+    resources :pictures, shallow: true
   end
-
-  resources :pictures
+  
 
   match 'provinces' => 'provinces#all', :as => :provinces
   match 'municipalities' => 'municipalities#all', :as => :municipalities

@@ -1,9 +1,13 @@
 class PicturesController < ApplicationController
-  
+
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all
+    match = request.url.scan(/provinces|regions|municipalities/)[0]
+    _class = match.singularize.capitalize.constantize
+    id = params[(match.singularize + "_id").to_sym].to_i
+    
+    @pictures = _class.find(id).symbol
 
     respond_to do |format|
       format.html
