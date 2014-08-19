@@ -22,7 +22,9 @@ set :ssh_options, {
 
 set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
 
-set :linked_dirs, fetch(:linked_dirs) + %w{public/system}
+linked_dirs = Set.new(fetch(:linked_dirs, [])) # https://github.com/capistrano/rails/issues/52
+linked_dirs.merge(%w{bin log tmp/pids tmp/cache tmp/sockets public/system})
+set :linked_dirs, linked_dirs.to_a
 
 # Default value for :format is :pretty
 # set :format, :pretty
