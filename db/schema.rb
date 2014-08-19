@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140724082613) do
+ActiveRecord::Schema.define(:version => 20140819092927) do
 
   create_table "caps", :force => true do |t|
     t.string   "number"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20140724082613) do
     t.datetime "photo_updated_at"
     t.integer  "picturable_id"
     t.string   "picturable_type"
-    t.string   "photo_url"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end

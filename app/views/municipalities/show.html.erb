@@ -5,7 +5,7 @@
 <div class="row-fluid">
   <div class="span6">
     <center>
-      <td><%= image_tag(@municipality.symbol.photo.url(:medium)) %></td>
+      <td><%= image_tag(@municipality.symbol.photo.url(:medium)) if @municipality.symbol %></td>
       <h2><%= @municipality.name %></h2>
     </center>
   </div>

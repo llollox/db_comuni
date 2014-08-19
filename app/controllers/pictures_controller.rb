@@ -6,12 +6,12 @@ class PicturesController < ApplicationController
     match = request.url.scan(/provinces|regions|municipalities/)[0]
     _class = match.singularize.capitalize.constantize
     id = params[(match.singularize + "_id").to_sym].to_i
-    
-    @pictures = _class.find(id).symbol
+
+    @picture = _class.find(id).symbol
+    @picture["photo_url"] = @picture.photo.url if !@picture.nil?
 
     respond_to do |format|
-      format.html
-      format.json { render json: @pictures }
+      format.json { render json: @picture }
     end
   end
 

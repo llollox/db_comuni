@@ -1,8 +1,6 @@
 class Picture < ActiveRecord::Base
-  attr_accessible :photo, :title, :photo_url
+  attr_accessible :photo, :title
 	belongs_to :picturable, polymorphic: true
-
-  before_save :update_photo_url
 
   has_attached_file :photo, 
 
@@ -31,15 +29,5 @@ class Picture < ActiveRecord::Base
 
   def is_pdf?
      ["application/pdf"].include?(self.photo_content_type) 
-  end
-
-  private
-
-  def update_photo_url
-    if !self.photo.blank?
-      self.photo_url = self.photo.url
-    else
-      self.photo_url = nil
-    end
   end
 end
