@@ -20,6 +20,8 @@ set :ssh_options, {
   port: 1122
 }
 
+set :pty, true
+
 set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
 
 linked_dirs = Set.new(fetch(:linked_dirs, [])) # https://github.com/capistrano/rails/issues/52
