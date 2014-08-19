@@ -22,6 +22,8 @@ set :ssh_options, {
 
 set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
 
+set :linked_dirs, fetch(:linked_dirs) + %w{public/system}
+
 # Default value for :format is :pretty
 # set :format, :pretty
 
