@@ -5,7 +5,9 @@ ComuniItaliani::Application.routes.draw do
 
 
   resources :regions, shallow: true do
+    
     resources :provinces, shallow: true do
+      
       resources :municipalities, shallow: true do
         resources :fractions, shallow: true
         resources :caps, shallow: true
@@ -13,6 +15,7 @@ ComuniItaliani::Application.routes.draw do
       end
       resources :pictures, shallow: true
     end
+    
     resources :pictures, shallow: true
   end
   
