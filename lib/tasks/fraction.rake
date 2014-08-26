@@ -26,9 +26,11 @@ namespace :fractions do
 
   task :set_region_ids => :environment do
     Fraction.all.each_with_index do |fraction, index|
-      fraction.region_id = fraction.municipality.region_id
-      fraction.save
-      puts "[" + index.to_s + "] " + fraction.name
+      if fraction.region_id.nil?
+        fraction.region_id = fraction.municipality.region_id
+        fraction.save
+        puts "[" + index.to_s + "] " + fraction.name
+      end
     end
   end
 
