@@ -15,6 +15,9 @@
 
   end
 
+  def find_by_region
+  end
+
   # GET /fractions
   # GET /fractions.json
   def all

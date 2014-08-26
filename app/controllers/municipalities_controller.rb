@@ -22,6 +22,13 @@ class MunicipalitiesController < ApplicationController
 
   end
 
+  def find_by_region
+    @municipalities = Region.find(params[:region_id].to_i).municipalities
+    respond_to do |format|
+      format.json { render json: @municipalities }
+    end
+  end
+
   # Optimized method to select2 in clients app!
   def contains
     @municipalities = []
