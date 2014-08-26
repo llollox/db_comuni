@@ -7,11 +7,19 @@ class MunicipalitiesController < ApplicationController
 
   def search
 
-    province_id = encode(params[:province_id]) if params[:province_id]
+    region_id = encode(params[:region_id]) if params[:region_id]
     name = encode(params[:name]) if params[:name]
 
-    if !province_id.nil?
-      @municipality = findMunicipalityByName(province_id, name)
+    if !region_id.nil?
+      region = Region.find(region_id.to_i)
+
+      region.municipalities.each do |municipality|
+        if encode(municipality.name) == encode(name) && region_id.to_i == municipality.region_id
+          @municipality = municipality 
+          break
+        end
+      end
+  
     else
       @municipality = findItemByName("Municipality", name)
     end
@@ -20,13 +28,6 @@ class MunicipalitiesController < ApplicationController
       format.json { render json: @municipality }
     end
 
-  end
-
-  def find_by_region
-    @municipalities = Region.find(params[:region_id].to_i).municipalities
-    respond_to do |format|
-      format.json { render json: @municipalities }
-    end
   end
 
   # Optimized method to select2 in clients app!

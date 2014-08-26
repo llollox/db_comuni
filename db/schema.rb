@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140822075403) do
+ActiveRecord::Schema.define(:version => 20140826130614) do
 
   create_table "caps", :force => true do |t|
     t.string   "number"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20140822075403) do
     t.integer  "municipality_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "region_id"
   end
 
   create_table "municipalities", :force => true do |t|

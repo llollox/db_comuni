@@ -24,6 +24,14 @@ namespace :fractions do
     end
   end
 
+  task :set_region_ids => :environment do
+    Fraction.all.each_with_index do |fraction, index|
+      fraction.region_id = fraction.municipality.region_id
+      fraction.save
+      puts "[" + index.to_s + "] " + fraction.name
+    end
+  end
+
   task :fetch => :environment do
     ROOT_URL = "http://italia.indettaglio.it/ita/comuni/comuni_"
     empty_letters = ['k','w','y','x']

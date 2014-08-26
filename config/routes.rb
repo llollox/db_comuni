@@ -34,12 +34,6 @@ ComuniItaliani::Application.routes.draw do
 
   post 'municipalities/contains' => 'municipalities#contains', :as => :municipalities_contains
 
-  post 'municipalities/find_by_region' => 'municipalities#find_by_region', :as => :find_municipalities_by_region
-  post 'fractions/find_by_region' => 'fractions#find_by_region', :as => :find_fractions_by_region
-
-  # match 'search' => 'search#search', :as => :search
-  # match 'search' => 'search#search', :as => :search
-
   match 'municipalities/:id/infobox' => 'municipalities#infobox', :as => :municipalities_infobox
 
   resources :users

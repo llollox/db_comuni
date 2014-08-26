@@ -6,6 +6,7 @@ class Region < ActiveRecord::Base
 
   has_many :provinces
   has_many :municipalities
+  has_many :fractions
 
   def capital
   	Municipality.find self.capital_id

@@ -1,7 +1,8 @@
 class Fraction < ActiveRecord::Base
-  attr_accessible :latitude, :longitude, :name, :municipality_id
+  attr_accessible :latitude, :longitude, :name, :municipality_id, :region_id
 
   belongs_to :municipality
+  belongs_to :region
 
  #  geocoded_by :address
 	# after_validation :geocode

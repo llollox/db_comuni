@@ -7,15 +7,27 @@
 
   def search
     name = encode(params[:name]) if params[:name]
-    @fractions = findItemByName("Fraction", name)
+    region_id = encode(params[:region_id]) if params[:region_id]
+
+    if !region_id.nil?
+      region = Region.find(region_id.to_i)
+      @fractions = []
+      region.fractions.each do |fraction|
+        if encode(fraction.name) == encode(name) && region_id.to_i == fraction.region_id
+          @fractions = @fractions << fraction 
+          break
+        end
+      end
+    else
+      @fractions = findItemByName("Fraction", name)
+    end
+
+    @fractions = @fractions.first if @fractions.size == 1
 
     respond_to do |format|
       format.json { render json: @fractions }
     end
 
-  end
-
-  def find_by_region
   end
 
   # GET /fractions
