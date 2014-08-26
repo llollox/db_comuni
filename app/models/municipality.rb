@@ -1,9 +1,9 @@
 class Municipality < ActiveRecord::Base
-  attr_accessible :name, :province_id,
+  attr_accessible :name, :province_id, :region_id,
   	:population, :density, :surface, :istat_code, :president,
   	:cadastral_code, :telephone_prefix, :email, :website, 
     :symbol, :latitude, :longitude
-  
+
   belongs_to :province
   belongs_to :region
   has_many :caps

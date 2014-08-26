@@ -22,12 +22,38 @@ class MunicipalitiesController < ApplicationController
 
   end
 
+  # Optimized method to select2 in clients app!
+  def contains
+    @municipalities = []
+
+    Region.all.sort_by! { |r| r.name }.each do |region|
+      municipalities_group = []
+      region.municipalities.each do |municipality|
+        if municipality.name.downcase.match(/#{params[:name].downcase}/)
+          municipality_hash = Hash.new
+          municipality_hash["id"] = municipality.id
+          municipality_hash["text"] = municipality.name + " (" + municipality.province.abbreviation + ")"
+          municipalities_group = municipalities_group << municipality_hash 
+        end
+      end
+
+      if !municipalities_group.empty?
+        region_group = Hash.new
+        region_group["text"] = region.name
+        region_group["children"] = municipalities_group
+        @municipalities = @municipalities << region_group
+      end
+    end
+
+    respond_to do |format|
+      format.json { render json: @municipalities }
+    end
+  end
+
   # GET /municipalities
   # GET /municipalities.json
   def all
-    @municipalities, @alphaParams = 
-       Municipality.all.sort_by{ |p| p.province_id }
-         .alpha_paginate(params[:letter], {:js => true}){|municipality| municipality.name}
+    @municipalities = Municipality.all
 
     respond_to do |format|
       format.html # index.html.erb

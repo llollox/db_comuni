@@ -23,6 +23,29 @@ namespace :municipalities do
     end
   end
 
+  task :set_region_ids => :environment do
+    Region.all.each do |region|
+      region.provinces.each do |province|
+        province.municipalities.each do |municipality|
+          municipality.region_id = region.id
+          municipality.save
+        end
+      end
+    end
+  end
+
+  task :shortest_name => :environment do
+    min = 10000
+    shortest = nil
+    Municipality.all.each do |municipality|
+      if municipality.name.size < min
+        min = municipality.name.size
+        shortest = municipality
+      end
+    end
+    puts "Municipality with shortest name: #{shortest.name} (#{shortest.province.name}) - #{shortest.province.region.name}"
+  end
+
   task :fetch => [:fetch_info_from_tuttaitalia, :execute_manually_changes]
 
   task :fetch_info_from_tuttaitalia => :environment do

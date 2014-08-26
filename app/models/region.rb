@@ -5,6 +5,7 @@ class Region < ActiveRecord::Base
   has_one :symbol, :class_name => "Picture", as: :picturable, dependent: :destroy
 
   has_many :provinces
+  has_many :municipalities
 
   def capital
   	Municipality.find self.capital_id

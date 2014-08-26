@@ -65,6 +65,8 @@ gem 'authlogic'
 gem 'scrypt'#encription for authlogic
 gem 'bcrypt-ruby'
 
+# gem "squeel"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
