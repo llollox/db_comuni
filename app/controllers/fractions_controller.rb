@@ -22,7 +22,9 @@
       @fractions = findItemByName("Fraction", name)
     end
 
-    @fractions = @fractions.first if @fractions.size == 1
+    if !@fractions.blank? && @fractions.is_a?(Array)
+      @fractions = @fractions.first if @fractions.size == 1 
+    end
 
     respond_to do |format|
       format.json { render json: @fractions }
