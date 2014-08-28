@@ -105,7 +105,10 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.string   "website"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "name_encoded"
   end
+
+  add_index "regions", ["name_encoded"], :name => "index_regions_on_name_encoded"
 
   create_table "users", :force => true do |t|
     t.string   "username"
