@@ -4,7 +4,7 @@ class Municipality < ActiveRecord::Base
   	:cadastral_code, :telephone_prefix, :email, :website, 
     :symbol, :latitude, :longitude, :name_encoded
 
-  after_save :update_name_encoded
+  # before_save :update_name_encoded
 
   belongs_to :province
   belongs_to :region
@@ -38,17 +38,16 @@ class Municipality < ActiveRecord::Base
     return nil
   end
 
-  def self.encode name
-    name = name.split("/").first if name.match(/\//)
-    name = name.split("\\").first if name.match(/\\/)
-    name = name.split(" - ").first if name.match(/ - /)
-    return name.gsub(/[^0-9A-Za-z]/, '').downcase
-  end
+  # def self.encode name
+  #   name = name.split("/").first if name.match(/\//)
+  #   name = name.split("\\").first if name.match(/\\/)
+  #   name = name.split(" - ").first if name.match(/ - /)
+  #   return name.gsub(/[^0-9A-Za-z]/, '').downcase
+  # end
 
-  private
+  # private
 
-  def update_name_encoded
-    self.name_encoded = encode(self.name)
-    self.save
-  end
+  # def update_name_encoded
+  #   self.name_encoded = encode(self.name)
+  # end
 end

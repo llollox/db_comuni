@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140828123303) do
+ActiveRecord::Schema.define(:version => 20140828140903) do
 
   create_table "caps", :force => true do |t|
     t.string   "number"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20140828123303) do
     t.string   "name_encoded"
   end
 
+  add_index "fractions", ["name", "region_id"], :name => "index_fractions_on_name_and_region_id"
   add_index "fractions", ["name_encoded"], :name => "index_fractions_on_name_encoded"
 
   create_table "municipalities", :force => true do |t|
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20140828123303) do
     t.string   "name_encoded"
   end
 
+  add_index "municipalities", ["name", "region_id"], :name => "index_municipalities_on_name_and_region_id"
   add_index "municipalities", ["name_encoded"], :name => "index_municipalities_on_name_encoded"
 
   create_table "pictures", :force => true do |t|

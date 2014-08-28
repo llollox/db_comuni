@@ -4,7 +4,7 @@ class Fraction < ActiveRecord::Base
   belongs_to :municipality
   belongs_to :region
 
-  after_save :update_name_encoded
+  # before_save :update_name_encoded
 
  #  geocoded_by :address
 	# after_validation :geocode
@@ -23,8 +23,14 @@ class Fraction < ActiveRecord::Base
     self.municipality.province
   end
 
-  def update_name_encoded
-    self.name_encoded = encode(self.name)
-    self.save
-  end
+  # def self.encode name
+  #   name = name.split("/").first if name.match(/\//)
+  #   name = name.split("\\").first if name.match(/\\/)
+  #   name = name.split(" - ").first if name.match(/ - /)
+  #   return name.gsub(/[^0-9A-Za-z]/, '').downcase
+  # end
+
+  # def update_name_encoded
+  #   self.name_encoded = encode(self.name)
+  # end
 end
