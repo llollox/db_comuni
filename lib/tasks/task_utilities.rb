@@ -98,10 +98,17 @@ module TaskUtilities
   end
 
   def addSymbol object, url
-    picture = Picture.new
+    picture = DropboxDbComuniPicture.new
     picture.photo = getPicture(url)
     picture.picturable = object
     object.symbol = picture
+  end
+
+  def addDropboxSymbol object, url
+    picture = DropboxDbComuniPicture.new
+    picture.photo = getPicture(url)
+    picture.picturable = object
+    object.dropbox_symbol = picture
   end
 
   def encode name

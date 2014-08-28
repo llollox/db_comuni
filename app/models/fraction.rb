@@ -4,6 +4,8 @@ class Fraction < ActiveRecord::Base
   belongs_to :municipality
   belongs_to :region
 
+  after_save :update_name_encoded
+
  #  geocoded_by :address
 	# after_validation :geocode
 
@@ -19,5 +21,10 @@ class Fraction < ActiveRecord::Base
 
   def province
     self.municipality.province
+  end
+
+  def update_name_encoded
+    self.name_encoded = encode(self.name)
+    self.save
   end
 end

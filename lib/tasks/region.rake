@@ -32,6 +32,21 @@ namespace :regions do
 
   end
 
+  task :fetch_symbols => :environment do
+    regions_links.each_with_index do |region_link, index|
+      region_page = openUrl(@@TUTTITALIA_URL + region_link.attr("href"))
+      symbol_url = region_page.css("table.uj img").attr("src").text
+
+      region_name = region_page.css("h1.ev").text.split("/")[0]
+      region = extractItem("Region", region_name)
+
+      addDropboxSymbol(region,symbol_url)
+
+      region.save
+      puts "[#{index}] " + region.name
+    end
+  end
+
   task :fetch_capitals => :environment do
     regions_links.each_with_index do |region_link, index|
 

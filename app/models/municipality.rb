@@ -2,7 +2,9 @@ class Municipality < ActiveRecord::Base
   attr_accessible :name, :province_id, :region_id,
   	:population, :density, :surface, :istat_code, :president,
   	:cadastral_code, :telephone_prefix, :email, :website, 
-    :symbol, :latitude, :longitude
+    :symbol, :latitude, :longitude, :name_encoded
+
+  after_save :update_name_encoded
 
   belongs_to :province
   belongs_to :region
@@ -10,6 +12,7 @@ class Municipality < ActiveRecord::Base
   has_many :fractions
 
   has_one :symbol, :class_name => "Picture", as: :picturable, dependent: :destroy
+  has_one :dropbox_symbol, :class_name => "DropboxDbComuniPicture", as: :picturable, dependent: :destroy
 
   geocoded_by :address
 	after_validation :geocode
@@ -28,4 +31,24 @@ class Municipality < ActiveRecord::Base
     self.province.region
   end
 
+  def self.search name
+    Municipality.all.each do |municipality|
+      return municipality if encode(municipality.name) == encode(name)
+    end
+    return nil
+  end
+
+  def self.encode name
+    name = name.split("/").first if name.match(/\//)
+    name = name.split("\\").first if name.match(/\\/)
+    name = name.split(" - ").first if name.match(/ - /)
+    return name.gsub(/[^0-9A-Za-z]/, '').downcase
+  end
+
+  private
+
+  def update_name_encoded
+    self.name_encoded = encode(self.name)
+    self.save
+  end
 end

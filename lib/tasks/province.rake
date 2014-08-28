@@ -41,6 +41,28 @@ namespace :provinces do
     end
   end
 
+  task :fetch_symbols => :environment do
+    provinces_links.each do |province_links|
+      province_url = province_links.attr("href")
+      province_page = openUrl(@@TUTTITALIA_URL + province_url)
+
+      province_name = parse_province_name(province_page.css("h1.ev").first.text)
+      puts "Name => " + province_name
+      
+      province = extractItem("Province", province_name)
+
+      symbol_img = province_page.css("table.uj img")
+      if symbol_img != nil && !symbol_img.empty?
+        symbol_url = symbol_img.attr("src").text
+        puts "\t Symbol => " + symbol_url
+        addDropboxSymbol(province, symbol_url)
+      end
+
+      province.save
+
+    end
+  end
+
   def parse_province_name text
     if text.match(/Provincia di /)
       return text.split("Provincia di ")[1]

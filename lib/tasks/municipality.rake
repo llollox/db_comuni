@@ -23,6 +23,14 @@ namespace :municipalities do
     end
   end
 
+  task :set_name_encoded => :environment do
+    Municipality.all.each_with_index do |municipality, index|
+      municipality.name_encoded = encode(municipality.name)
+      municipality.save
+      puts "[#{index}] " + municipality.name
+    end
+  end  
+
   task :set_region_ids => :environment do
     Region.all.each do |region|
       region.provinces.each do |province|
@@ -47,6 +55,37 @@ namespace :municipalities do
   end
 
   task :fetch => [:fetch_info_from_tuttaitalia, :execute_manually_changes]
+
+  task :fetch_symbols => :environment do
+    municipalities_links[2247..-1].each do |municipality_link|
+      municipality_page = openUrl(municipality_link)
+      if municipality_page != nil 
+        province_abbreviation = municipality_page.css("table.uj td").first.
+          next_element.text.match(/[A-Z]{2}/).to_s
+        province = Province.where(:abbreviation => province_abbreviation).first
+
+        # Extract Municipality Name
+        municipality_name = municipality_page.css("h1.ev").first.text
+
+        # Extract Municipality Object
+        municipality = extractMunicipality(province.id, municipality_name)
+        symbol_img = municipality_page.css("table.uj img")
+        if !symbol_img.empty? # no img found
+          puts "\t Symbol => " + symbol_img.attr("src").text
+          symbol_url = symbol_img.attr("src").text
+          addDropboxSymbol(municipality, symbol_url)
+        else
+          fetch_symbol_from_wikipedia(municipality)
+        end
+
+        municipality.save
+      end
+    end
+  end
+
+  # task :fetch_symbols => :environment do
+    
+  # end
 
   task :fetch_info_from_tuttaitalia => :environment do
 
@@ -135,7 +174,7 @@ namespace :municipalities do
         else
           symbol_url = "http:" + img.attr("src")
           puts "\t Symbol => " + symbol_url
-          addSymbol(municipality, symbol_url)
+          addDropboxSymbol(municipality, symbol_url)
         end
       end
     else

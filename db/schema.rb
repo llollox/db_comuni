@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140826130614) do
+ActiveRecord::Schema.define(:version => 20140828123303) do
 
   create_table "caps", :force => true do |t|
     t.string   "number"
     t.integer  "municipality_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "dropbox_db_comuni_pictures", :force => true do |t|
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "picturable_id"
+    t.string   "picturable_type"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "fractions", :force => true do |t|
@@ -28,7 +39,10 @@ ActiveRecord::Schema.define(:version => 20140826130614) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "region_id"
+    t.string   "name_encoded"
   end
+
+  add_index "fractions", ["name_encoded"], :name => "index_fractions_on_name_encoded"
 
   create_table "municipalities", :force => true do |t|
     t.integer  "province_id"
@@ -47,7 +61,10 @@ ActiveRecord::Schema.define(:version => 20140826130614) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "region_id"
+    t.string   "name_encoded"
   end
+
+  add_index "municipalities", ["name_encoded"], :name => "index_municipalities_on_name_encoded"
 
   create_table "pictures", :force => true do |t|
     t.string   "photo_file_name"

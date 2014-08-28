@@ -1,6 +1,6 @@
 class Picture < ActiveRecord::Base
   attr_accessible :photo, :title
-	belongs_to :picturable, polymorphic: true
+  belongs_to :picturable, polymorphic: true
 
   has_attached_file :photo, 
 

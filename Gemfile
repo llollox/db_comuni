@@ -65,6 +65,8 @@ gem 'authlogic'
 gem 'scrypt'#encription for authlogic
 gem 'bcrypt-ruby'
 
+gem "paperclip-dropbox", ">= 1.1.7"
+
 # gem "squeel"
 
 # To use ActiveModel has_secure_password
