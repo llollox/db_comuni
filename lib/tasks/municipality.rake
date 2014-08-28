@@ -57,7 +57,7 @@ namespace :municipalities do
   task :fetch => [:fetch_info_from_tuttaitalia, :execute_manually_changes]
 
   task :fetch_symbols => :environment do
-    municipalities_links[4098..-1].each do |municipality_link|
+    municipalities_links[4117..-1].each do |municipality_link|
       municipality_page = openUrl(municipality_link)
       if municipality_page != nil 
         province_abbreviation = municipality_page.css("table.uj td").first.
