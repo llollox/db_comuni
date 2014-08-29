@@ -1,4 +1,5 @@
 class Fraction < ActiveRecord::Base
+  # include Searchable
   attr_accessible :latitude, :longitude, :name, :municipality_id, :region_id
 
   belongs_to :municipality

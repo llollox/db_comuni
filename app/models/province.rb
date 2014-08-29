@@ -5,8 +5,7 @@ class Province < ActiveRecord::Base
   
   belongs_to :region
   has_many :municipalities
-  has_one :symbol, :class_name => "Picture", as: :picturable, dependent: :destroy
-  has_one :dropbox_symbol, :class_name => "DropboxDbComuniPicture", as: :picturable, dependent: :destroy
+  has_one :symbol, :class_name => "DbComuniPicture", as: :picturable, dependent: :destroy
 
   validates :name, presence: true
 

@@ -1,6 +1,6 @@
 class RegionsController < ApplicationController
-  require "#{Rails.root}/lib/tasks/task_utilities"
-  include TaskUtilities
+  # require "#{Rails.root}/lib/tasks/task_utilities"
+  # include TaskUtilities
   
   # skip_before_filter  :verify_authenticity_token
 

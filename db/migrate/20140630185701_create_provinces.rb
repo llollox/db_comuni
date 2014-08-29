@@ -4,7 +4,6 @@ class CreateProvinces < ActiveRecord::Migration
     	t.belongs_to :region
       t.string :name
       t.string :president
-      t.integer :capital_id
       t.integer :population
       t.float :density
       t.float :surface
