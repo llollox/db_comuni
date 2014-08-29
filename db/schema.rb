@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.datetime "photo_updated_at"
     t.integer  "picturable_id"
     t.string   "picturable_type"
+    t.string   "title"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
