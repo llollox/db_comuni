@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140828142051) do
+ActiveRecord::Schema.define(:version => 20140828062801) do
 
   create_table "caps", :force => true do |t|
     t.string   "number"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "dropbox_db_comuni_pictures", :force => true do |t|
+  create_table "db_comuni_pictures", :force => true do |t|
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -31,15 +31,17 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "db_comuni_pictures", ["picturable_id", "picturable_type"], :name => "index_db_comuni_pictures_on_picturable_id_and_picturable_type"
+
   create_table "fractions", :force => true do |t|
     t.string   "name"
+    t.string   "name_encoded"
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "municipality_id"
+    t.integer  "region_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "region_id"
-    t.string   "name_encoded"
   end
 
   add_index "fractions", ["name_encoded", "region_id"], :name => "index_fractions_on_name_encoded_and_region_id"
@@ -47,7 +49,9 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
 
   create_table "municipalities", :force => true do |t|
     t.integer  "province_id"
+    t.integer  "region_id"
     t.string   "name"
+    t.string   "name_encoded"
     t.string   "president"
     t.integer  "population"
     t.float    "density"
@@ -61,8 +65,6 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.float    "longitude"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.integer  "region_id"
-    t.string   "name_encoded"
   end
 
   add_index "municipalities", ["name_encoded", "region_id"], :name => "index_municipalities_on_name_encoded_and_region_id"
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.datetime "photo_updated_at"
     t.integer  "picturable_id"
     t.string   "picturable_type"
+    t.string   "photo_url"
     t.string   "title"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
@@ -96,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
 
   create_table "regions", :force => true do |t|
     t.string   "name"
+    t.string   "name_encoded"
     t.integer  "capital_id"
     t.string   "president"
     t.integer  "population"
@@ -106,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20140828142051) do
     t.string   "website"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "name_encoded"
   end
 
   add_index "regions", ["name_encoded"], :name => "index_regions_on_name_encoded"

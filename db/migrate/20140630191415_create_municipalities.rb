@@ -4,7 +4,7 @@ class CreateMunicipalities < ActiveRecord::Migration
       t.belongs_to :province
       t.belongs_to :region
       t.string :name
-      t.integer :capital_id
+      t.string :name_encoded
       t.string :president
       t.integer :population
       t.float :density
@@ -19,5 +19,7 @@ class CreateMunicipalities < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :municipalities, :name_encoded
+    add_index :municipalities, [:name_encoded, :region_id]
   end
 end

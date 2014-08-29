@@ -1,4 +1,6 @@
 class Municipality < ActiveRecord::Base
+  # include Searchable
+  
   attr_accessible :name, :province_id, :region_id,
   	:population, :density, :surface, :istat_code, :president,
   	:cadastral_code, :telephone_prefix, :email, :website, 
@@ -11,8 +13,7 @@ class Municipality < ActiveRecord::Base
   has_many :caps
   has_many :fractions
 
-  has_one :symbol, :class_name => "Picture", as: :picturable, dependent: :destroy
-  has_one :dropbox_symbol, :class_name => "DropboxDbComuniPicture", as: :picturable, dependent: :destroy
+  has_one :symbol, :class_name => "DbComuniPicture", as: :picturable, dependent: :destroy
 
   geocoded_by :address
 	after_validation :geocode
@@ -29,13 +30,6 @@ class Municipality < ActiveRecord::Base
 
   def region
     self.province.region
-  end
-
-  def self.search name
-    Municipality.all.each do |municipality|
-      return municipality if encode(municipality.name) == encode(name)
-    end
-    return nil
   end
 
   # def self.encode name

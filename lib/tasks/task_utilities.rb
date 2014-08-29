@@ -112,10 +112,13 @@ module TaskUtilities
   end
 
   def encode name
+    name = name.downcase
     name = name.split("/").first if name.match(/\//)
     name = name.split("\\").first if name.match(/\\/)
     name = name.split(" - ").first if name.match(/ - /)
-    return name.gsub(/[^0-9A-Za-z]/, '').downcase
+    name = name.gsub(/\s(e|del|dello|di|delle|dell|de|d|da|dal|della|dei|du|san)\s/, '')
+    name = name.gsub(/(d|dell|dall|sant)'\s*/,'')
+    return name.gsub(/[^0-9A-Za-z]/, '')
   end
 
   def findItemByName class_name, item_name

@@ -2,6 +2,7 @@ class CreateRegions < ActiveRecord::Migration
   def change
     create_table :regions do |t|
       t.string :name
+      t.string :name_encoded
       t.integer :capital_id
       t.string :president
       t.integer :population
@@ -13,5 +14,6 @@ class CreateRegions < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :regions, :name_encoded
   end
 end
