@@ -23,14 +23,6 @@ namespace :municipalities do
     end
   end
 
-  task :set_name_encoded => :environment do
-    Municipality.all.each_with_index do |municipality, index|
-      municipality.name_encoded = encode(municipality.name)
-      municipality.save
-      puts "[#{index}] " + municipality.name
-    end
-  end  
-
   task :set_region_ids => :environment do
     Region.all.each do |region|
       region.provinces.each do |province|

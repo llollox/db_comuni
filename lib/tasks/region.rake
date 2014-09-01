@@ -4,15 +4,7 @@ namespace :regions do
 
   require 'nokogiri'
   require "#{Rails.root}/lib/tasks/task_utilities"
-  include TaskUtilities
-
-  task :set_name_encoded => :environment do
-    Region.all.each_with_index do |region_name, index|
-      region_name.name_encoded = encode(region_name.name)
-      region_name.save
-      puts "[#{index}] " + region_name.name
-    end
-  end 
+  include TaskUtilities 
 
   desc "Fetch some information about this region"
   task :fetch => :environment do

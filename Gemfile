@@ -30,6 +30,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'meta_request'
   #html scraping
+  
+  # import export database
   gem 'taps'
 
   gem 'capistrano',  '~> 3.1'
