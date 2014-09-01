@@ -70,19 +70,6 @@ ActiveRecord::Schema.define(:version => 20140828062801) do
   add_index "municipalities", ["name_encoded", "region_id"], :name => "index_municipalities_on_name_encoded_and_region_id"
   add_index "municipalities", ["name_encoded"], :name => "index_municipalities_on_name_encoded"
 
-  create_table "pictures", :force => true do |t|
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.integer  "picturable_id"
-    t.string   "picturable_type"
-    t.string   "photo_url"
-    t.string   "title"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "provinces", :force => true do |t|
     t.integer  "region_id"
     t.string   "name"
