@@ -24,14 +24,6 @@ namespace :fractions do
     end
   end
 
-  task :set_name_encoded => :environment do
-    Fraction.all.each_with_index do |fraction, index|
-      fraction.name_encoded = encode(fraction.name)
-      fraction.save
-      puts "[#{index}] " + fraction.name
-    end
-  end 
-
   task :set_region_ids => :environment do
     Fraction.all.each_with_index do |fraction, index|
       if fraction.region_id.nil?

@@ -1,5 +1,5 @@
 class DbComuniPicture < ActiveRecord::Base
-  attr_accessible :photo, :title
+  attr_accessible :photo, :title, :photo_url
   belongs_to :picturable, polymorphic: true
   
 
