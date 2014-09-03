@@ -1,7 +1,7 @@
 class Province < ActiveRecord::Base
   attr_accessible :abbreviation, :name, :region_id,
   	:population, :density, :surface, :symbol, 
-    :president, :email, :website
+    :president, :email, :website, :name_encoded
   
   belongs_to :region
   has_many :municipalities
