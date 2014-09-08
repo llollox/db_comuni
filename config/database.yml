@@ -13,7 +13,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: comuni_italiani_development
+  database: municipalities_development
   pool: 5
   username: postgres
   password: 

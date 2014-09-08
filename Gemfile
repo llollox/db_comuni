@@ -69,6 +69,8 @@ gem 'bcrypt-ruby'
 
 gem "paperclip-dropbox", ">= 1.1.7"
 
+gem 'flickraw'
+
 # gem "squeel"
 
 # To use ActiveModel has_secure_password

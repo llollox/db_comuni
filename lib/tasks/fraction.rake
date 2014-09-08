@@ -7,6 +7,7 @@ namespace :fractions do
   include TaskUtilities
   require 'i18n'
 
+
   task :geocode => :environment do
     Region.all.each do |region|
       puts "*****************   " + region.name + "   *****************"

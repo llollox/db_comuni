@@ -14,7 +14,9 @@ class Municipality < ActiveRecord::Base
   has_many :fractions
 
   has_one :symbol, :class_name => "DbComuniPicture", as: :picturable, dependent: :destroy
+  has_many :pictures, :class_name => "FlickrPicture", as: :picturable, dependent: :destroy
 
+  
   geocoded_by :address
 	after_validation :geocode
 

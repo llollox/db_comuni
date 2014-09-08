@@ -5,6 +5,85 @@ namespace :municipalities do
   require 'nokogiri'
   require "#{Rails.root}/lib/tasks/task_utilities"
   include TaskUtilities
+  require 'flickraw'
+  require 'rubygems'
+
+
+  task :fetch_panoramio_pictures => :environment do
+    uri = URI.parse("http://www.panoramio.com")
+    http = Net::HTTP.new(uri.host, uri.port)
+
+    Municipality.all.each_with_index do |municipality,index|
+      puts "[#{index}] #{municipality.name}"
+      if !municipality.latitude.nil? && !municipality.longitude.nil?
+        points = Geocoder::Calculations.bounding_box([municipality.latitude, municipality.longitude], 1)
+
+        request = Net::HTTP::Get.new("/map/get_panoramas?order=popularity&set=public&size=original&from=0&to=12&minx=#{points[1]}&miny=#{points[0]}&maxx=#{points[3]}&maxy=#{points[2]}&mapfilter=true")
+      
+        response = http.request(request)
+        JSON.parse(response.body)["photos"].first(10).each do |photo|
+          picture = FlickrPicture.new
+          picture.photo_url = photo["photo_file_url"]
+          picture.title = photo["photo_title"].truncate(250)
+          picture.picturable = municipality
+          municipality.pictures << picture
+          puts "\t #{picture.title} -> #{picture.photo_url}"
+        end
+        municipality.save
+      end
+    end
+  end
+
+  FLICKR_API_KEY = 'a4e2045930ece1b3981936870d5eb910'
+  FLICKR_API_SECRET = '09a1bc38c0371d05'
+
+  task :fetch_flickr_pictures => :environment do
+
+    FlickRaw.api_key= FLICKR_API_KEY
+    FlickRaw.shared_secret= FLICKR_API_SECRET
+
+    Municipality.all.each_with_index do |municipality,index|
+      # if municipality.pictures.blank?
+        puts "[#{index}] #{municipality.name}"
+        
+        list = flickr.photos.search(:text => municipality.name, 
+          :lat => municipality.latitude, :lon => municipality.longitude).to_a
+
+        if list.size <= 5
+          selected = list 
+        else
+          selected = Set.new
+          while selected.size < 5
+            selected.add(list.sample)
+          end
+        end
+
+        selected.each do |photo|
+          info = flickr.photos.getInfo :photo_id => photo.id, :secret => photo.secret
+          picture = FlickrPicture.new
+          picture.photo_url = FlickRaw.url_b(info)
+          picture.picturable = municipality
+          municipality.pictures << picture
+          puts "\t #{picture.photo_url}"
+        end
+
+        # municipality.save
+      # end
+    end
+
+  end
+
+  task :longest => :environment do
+    max = 0
+    max_municipality = nil
+    Municipality.all.each do |municipality|
+      if municipality.name.size > max
+        max = municipality.name.size
+        max_municipality = municipality
+      end
+    end
+    puts "Maximum: #{max_municipality.name} with #{max_municipality.name.size.to_s} characters!" 
+  end
 
   task :geocode => :environment do
     Region.all.each do |region|
