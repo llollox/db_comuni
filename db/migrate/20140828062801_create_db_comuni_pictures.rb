@@ -2,6 +2,7 @@ class CreateDbComuniPictures < ActiveRecord::Migration
   def change
     create_table :db_comuni_pictures do |t|
       t.attachment :photo
+      t.string :photo_url
       t.belongs_to :picturable, polymorphic: true
 
       t.timestamps
