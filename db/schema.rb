@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(:version => 20140908192227) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "photo_url"
     t.integer  "picturable_id"
     t.string   "picturable_type"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.string   "photo_url"
   end
 
   add_index "db_comuni_pictures", ["picturable_id", "picturable_type"], :name => "index_db_comuni_pictures_on_picturable_id_and_picturable_type"
@@ -116,5 +116,15 @@ ActiveRecord::Schema.define(:version => 20140908192227) do
   end
 
   add_index "regions", ["name_encoded"], :name => "index_regions_on_name_encoded"
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
 end
